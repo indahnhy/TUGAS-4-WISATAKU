@@ -1,0 +1,266 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/destinasi": {
+      "get": {
+        "operationId": "DestinasiController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Daftar destinasi berhasil ditampilkan"
+          }
+        },
+        "summary": "Menampilkan semua destinasi wisata",
+        "tags": [
+          "destinasi"
+        ]
+      },
+      "post": {
+        "operationId": "DestinasiController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDestinasiDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Destinasi berhasil ditambahkan"
+          },
+          "400": {
+            "description": "Data destinasi tidak valid"
+          }
+        },
+        "summary": "Menambahkan destinasi wisata",
+        "tags": [
+          "destinasi"
+        ]
+      }
+    },
+    "/destinasi/{id}": {
+      "get": {
+        "operationId": "DestinasiController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detail destinasi berhasil ditampilkan"
+          },
+          "404": {
+            "description": "Destinasi tidak ditemukan"
+          }
+        },
+        "summary": "Menampilkan detail destinasi berdasarkan ID",
+        "tags": [
+          "destinasi"
+        ]
+      },
+      "patch": {
+        "operationId": "DestinasiController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDestinasiDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Destinasi berhasil diperbarui"
+          },
+          "404": {
+            "description": "Destinasi tidak ditemukan"
+          }
+        },
+        "summary": "Memperbarui data destinasi",
+        "tags": [
+          "destinasi"
+        ]
+      },
+      "delete": {
+        "operationId": "DestinasiController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Destinasi berhasil dihapus"
+          },
+          "404": {
+            "description": "Destinasi tidak ditemukan"
+          }
+        },
+        "summary": "Menghapus destinasi wisata",
+        "tags": [
+          "destinasi"
+        ]
+      }
+    },
+    "/destinasi/{id}/ulasan": {
+      "get": {
+        "operationId": "DestinasiController_findUlasan",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar ulasan berhasil ditampilkan"
+          },
+          "404": {
+            "description": "Destinasi tidak ditemukan"
+          }
+        },
+        "summary": "Menampilkan ulasan milik destinasi tertentu",
+        "tags": [
+          "destinasi"
+        ]
+      }
+    },
+    "/destinasi/{id}/fasilitas": {
+      "get": {
+        "operationId": "DestinasiController_findFasilitas",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar fasilitas berhasil ditampilkan"
+          },
+          "404": {
+            "description": "Destinasi tidak ditemukan"
+          }
+        },
+        "summary": "Menampilkan fasilitas milik destinasi tertentu",
+        "tags": [
+          "destinasi"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "WisataKu API",
+    "description": "Dokumentasi API untuk aplikasi WisataKu",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "destinasi",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateDestinasiDto": {
+        "type": "object",
+        "properties": {
+          "nama": {
+            "type": "string",
+            "example": "Pantai Kuta"
+          },
+          "deskripsi": {
+            "type": "string",
+            "example": "Pantai populer di Bali"
+          },
+          "lokasi": {
+            "type": "string",
+            "example": "Bali"
+          },
+          "hargaTiket": {
+            "type": "number",
+            "example": 15000
+          }
+        },
+        "required": [
+          "nama",
+          "deskripsi",
+          "lokasi",
+          "hargaTiket"
+        ]
+      },
+      "UpdateDestinasiDto": {
+        "type": "object",
+        "properties": {
+          "nama": {
+            "type": "string",
+            "example": "Pantai Kuta"
+          },
+          "deskripsi": {
+            "type": "string",
+            "example": "Pantai populer di Bali"
+          },
+          "lokasi": {
+            "type": "string",
+            "example": "Bali"
+          },
+          "hargaTiket": {
+            "type": "number",
+            "example": 15000
+          }
+        }
+      }
+    }
+  }
+}
